@@ -22,9 +22,9 @@
 
 ### 1.1 Anforderungen
 
-Wir entwickeln ein Mehrspieler-UNO-Spiel, das es Spielern ermöglicht, sich in einer Lobby zu verbinden und eine Runde UNO nach den klassischen Regeln zu spielen.
+Wir entwickeln ein Mehrspieler-Karten-Spiel, das es Spielern ermöglicht, sich in einer Lobby zu verbinden und eine Runde Karten nach den klassischen Regeln zu spielen.
 
-In diesem Projekt setzen wir die klassische UNO-Spielmechanik in einer Webanwendung um, bei der mehrere Spieler über eine Online-Verbindung in Echtzeit interagieren können. Unser Ziel ist es, eine benutzerfreundliche Plattform zu schaffen, die Echtzeit-Updates und eine korrekte Regelumsetzung ermöglicht. Dabei lernen wir, ein Backend mit sauberer Architektur zu entwerfen, REST-APIs zu entwickeln, MongoDB für Datenverwaltung einzusetzen und Frontend und Backend effizient zu verknüpfen. Zudem möchten wir unser Verständnis von Programmierprinzipien wie Modularität, Validierung und Fehlerbehandlung vertiefen.
+In diesem Projekt setzen wir die klassische Karten-Spielmechanik in einer Webanwendung um, bei der mehrere Spieler über eine Online-Verbindung in Echtzeit interagieren können. Unser Ziel ist es, eine benutzerfreundliche Plattform zu schaffen, die Echtzeit-Updates und eine korrekte Regelumsetzung ermöglicht. Dabei lernen wir, ein Backend mit sauberer Architektur zu entwerfen, REST-APIs zu entwickeln, MongoDB für Datenverwaltung einzusetzen und Frontend und Backend effizient zu verknüpfen. Zudem möchten wir unser Verständnis von Programmierprinzipien wie Modularität, Validierung und Fehlerbehandlung vertiefen.
 
 ### 1.2 User Stories
 
