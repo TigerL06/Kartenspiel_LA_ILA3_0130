@@ -26,24 +26,23 @@ Wir entwickeln ein Mehrspieler-Karten-Spiel, das es Spielern ermöglicht, sich i
 
 In diesem Projekt setzen wir die klassische Karten-Spielmechanik in einer Webanwendung um, bei der mehrere Spieler über eine Online-Verbindung in Echtzeit interagieren können. Unser Ziel ist es, eine benutzerfreundliche Plattform zu schaffen, die Echtzeit-Updates und eine korrekte Regelumsetzung ermöglicht. Dabei lernen wir, ein Backend mit sauberer Architektur zu entwerfen, REST-APIs zu entwickeln, MongoDB für Datenverwaltung einzusetzen und Frontend und Backend effizient zu verknüpfen. Zudem möchten wir unser Verständnis von Programmierprinzipien wie Modularität, Validierung und Fehlerbehandlung vertiefen.
 
-### 1.2 User Stories
 
-| US-№ | Verbindlichkeit | Typ           | Beschreibung                                                                                                                                                     |
+| A-№ | Verbindlichkeit | Typ           | Beschreibung                                                                                                                                                     |
 | ---- | --------------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 1    | Muss            | Randbedingung | Wir verwenden mindestens .Net Version 7.0 oder höher verewendet wird.                           |
 | 2    | Muss            | Randbedingung | Das Frontend wird mit HTML, CSS und Java Script umgesetzt wird.                          |
 | 3    | Muss            | Randbedingung | Als zentrale Datenbank wird MongoDB Atlas verwendet wird.                     |
 | 4    | Muss            | Qualität      | Die Webseite wird als Single Page Application umgesetzt wird.                                     |
-| 5    | Muss            | Funktional    | Als Benutzer möchte ich, dass ich eine Gruppe/Raum erstellen kann in dem ich mit anderen Spielern spielen kann, damit ich nicht alleine Spiele                   |
-| 6    | Muss            | Funktional    | Als Benutzer möchte ich, dass ich mir einen Benutzername für das Spiel geben kann, damit ich weiss wer ich bin.                                                  |
-| 7    | Muss            | Funktional    | Als Benutzer möchte ich, dass ich ein Kartenspiel in der Gruppe/Raum spielen kann, damit ich etwas spielen kann.                                                 |
-| 8    | Muss            | Funktional    | Als Entwickler möchte ich, dass alle Daten in der MongoDB-Datenbank gespeichert werden.                                                                          |
-| 9    | Muss            | Funktional    | Als Entwickler möchte ich, dass das Frontend die Daten für ein Spiel über das Backend holt.                                                                      |
-| 10   | Muss            | Funktional    | Als Benutzer möchte ich, dass mir Karten ausgeteilt werden wenn das Spiel startet, damit ich ein Spiel spielen kann.                                             |
-| 11   | Muss            | Funktional    | Als Benutzer möchte ich, dass ich nur Karten legen kann die nach den Regeln gelegt werden können, damit ich ein Spiel spielen kann, dass nicht inkonsistent ist. |
-| 12   | Muss            | Funktional    | Als Benutzer möchte ich, dass der erste Spieler welcher keine Karte mehr hat gewonnen hat, damit man ein Spiel gewinnen kann.                                    |
-| 13   | Muss            | Funktional    | Als Entwickler möchte ich, dass der Spielstand vom Spiel gespeichtert wird, damit man weiss welche Züge der Spieler gemacht hat.                                 |
-| 14   | Muss            | Funktional    | Als Benutzer möchte ich, dass die Webseite online zugänglich ist, damit ich es spielen kann.                                                                     |
+| 5    | Muss            | Funktional    | Ich kann eine Gruppe/ Raum erstellen um zu spielen.               |
+| 6    | Muss            | Funktional    | Ich kann mir einen Benutzernamen geben.                    |
+| 7    | Muss            | Funktional    | Man kann das Spiel in einer Gruppe/ Raum spielen.                                               |
+| 8    | Muss            | Funktional    | Die Daten werden in einer MongoDB Datenbank gespeichert.       |
+| 9    | Muss            | Funktional    | Das Frontend holt die Daten für das Spiel über das Backend.                            |
+| 10   | Muss            | Funktional    | Beim Starten des Spiels werden die Karten ausgeteilt.                                |
+| 11   | Muss            | Funktional    | Man kann nur Karten legen die von den Regeln erlaubt werden. |
+| 12   | Muss            | Funktional    | Der erste Spieler ohne Karte gewinnt das Spiel.            |
+| 13   | Muss            | Funktional    | Der Spielstand und die Züge der Spieler werden gespeichert.     |
+| 14   | Muss            | Funktional    | Die Webseite ist für das Spielen online zugänglich.                  |
 
 ✍️ Jede User Story hat eine ganzzahlige Nummer (1, 2, 3 etc.), eine Verbindlichkeit (Muss oder Kann?), und einen Typ (Funktional, Qualität, Rand). Die User Story selber hat folgende Form: _Als ein 🤷‍♂️ möchte ich 🤷‍♂️, damit 🤷‍♂️_.
 
