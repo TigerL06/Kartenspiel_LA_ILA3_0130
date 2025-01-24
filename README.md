@@ -20,7 +20,7 @@
 
 ## 1 Informieren
 
-### 1.1 Ihr Projekt
+### 1.1 Anforderungen
 
 Wir entwickeln ein Mehrspieler-UNO-Spiel, das es Spielern ermöglicht, sich in einer Lobby zu verbinden und eine Runde UNO nach den klassischen Regeln zu spielen.
 
@@ -30,10 +30,10 @@ In diesem Projekt setzen wir die klassische UNO-Spielmechanik in einer Webanwend
 
 | US-№ | Verbindlichkeit | Typ           | Beschreibung                                                                                                                                                     |
 | ---- | --------------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1    | Muss            | Randbedingung | Als ein Entwickler möchte ich, dass mindestens .Net Version 7.0 oder höher verewendet wird, damit eine aktuelle Version vewendet wird.                           |
-| 2    | Muss            | Randbedingung | Als ein Enwickler möchte ich, dass das Frontend mit HTML, CSS und Java Script umgesetzt wird, damit das Endprofukt eine Webseite ist.                            |
-| 3    | Muss            | Randbedingung | Als ein Entwickler möchte ich, dass als zentrale Datenbank, MongoDB Atlas verwendet wird, damit alle Teammitglieder darauf zugreifen können.                     |
-| 4    | Muss            | Qualität      | Als ein Benutzer möchte ich, dass die Webseite als Single Page Application umgesetzt wird, damit die Ladezeit gering ist.                                        |
+| 1    | Muss            | Randbedingung | Wir verwenden mindestens .Net Version 7.0 oder höher verewendet wird.                           |
+| 2    | Muss            | Randbedingung | Das Frontend wird mit HTML, CSS und Java Script umgesetzt wird.                          |
+| 3    | Muss            | Randbedingung | Als zentrale Datenbank wird MongoDB Atlas verwendet wird.                     |
+| 4    | Muss            | Qualität      | Die Webseite wird als Single Page Application umgesetzt wird.                                     |
 | 5    | Muss            | Funktional    | Als Benutzer möchte ich, dass ich eine Gruppe/Raum erstellen kann in dem ich mit anderen Spielern spielen kann, damit ich nicht alleine Spiele                   |
 | 6    | Muss            | Funktional    | Als Benutzer möchte ich, dass ich mir einen Benutzername für das Spiel geben kann, damit ich weiss wer ich bin.                                                  |
 | 7    | Muss            | Funktional    | Als Benutzer möchte ich, dass ich ein Kartenspiel in der Gruppe/Raum spielen kann, damit ich etwas spielen kann.                                                 |
