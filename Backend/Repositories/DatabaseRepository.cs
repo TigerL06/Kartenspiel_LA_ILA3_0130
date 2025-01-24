@@ -49,7 +49,9 @@ namespace Backend.Repositories
 
         public Player GetPlayerById(string id)
         {
-            return null;
+            var player = _playerCollection.Find(player => player.Id == id).FirstOrDefault();
+
+            return player;
         }
     }
 }
