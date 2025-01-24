@@ -1,0 +1,38 @@
+﻿# Build-Output
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.sln.docstates
+
+# Visual Studio Code
+.vscode/
+
+# Log-Dateien
+*.log
+
+# Debugging und temporäre Dateien
+*.pdb
+*.tmp
+*.ide
+*.cache
+*.tlog
+*.idb
+*.opendb
+*.db
+*.ilk
+
+# Backup-Dateien
+*.bak
+*.old
+*.orig
+
+# Betriebssystemspezifisch
+.DS_Store
+Thumbs.db
+
+# Andere temporäre Dateien
+~$*
