@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplayer Card Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Lobby Section -->
+        <section id="lobby" class="hidden">
+            <h1>Lobby</h1>
+            <form id="create-room-form">
+                <input type="text" id="username" placeholder="Enter your username" required>
+                <button type="submit">Create Room</button>
+            </form>
+            <div id="rooms">
+                <h2>Available Rooms</h2>
+                <ul id="room-list">
+                    <!-- Dynamically populated -->
+                </ul>
+            </div>
+        </section>
+
+        <!-- Game Room Section -->
+        <section id="game-room" class="hidden">
+            <h1>Game Room</h1>
+            <div id="players">
+                <!-- Player list dynamically populated -->
+            </div>
+            <div id="game-board">
+                <div id="deck">Deck</div>
+                <div id="played-cards">Played Cards</div>
+                <div id="player-hand">
+                    <!-- Player's cards dynamically populated -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
