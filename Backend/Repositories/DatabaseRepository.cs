@@ -21,6 +21,10 @@ namespace Backend.Repositories
             _statusCollection = database.GetCollection<Status>("Spielstand");
         }
 
+        /// <summary>
+        /// Function to get all cards from the database
+        /// </summary>
+        /// <returns></returns>
         public List<Card> GetAllCards()
         {
             var bsonCards = _cardCollection.Find(_ => true).ToList();
@@ -28,7 +32,7 @@ namespace Backend.Repositories
             var cards = bsonCards.Select(card => new Card
             {
                 Id = card.Id,
-                Nummer = card.Nummer ?? 0,
+                Nummer = card.Nummer,
                 Farbe = card.Farbe,
                 Spezial = card.Spezial
             }).ToList();
@@ -36,6 +40,10 @@ namespace Backend.Repositories
             return cards;
         }
 
+        /// <summary>
+        /// Funktion to get all players from the database
+        /// </summary>
+        /// <returns></returns>
         public List<Player> GetAllPlayers()
         {
             var bsonPlayers = _playerCollection.Find(_ => true).ToList();
@@ -50,6 +58,12 @@ namespace Backend.Repositories
             return players;
         }
 
+
+        /// <summary>
+        /// Function to get a player by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Player GetPlayerById(string id)
         {
             var player = _playerCollection.Find(player => player.Id == id).FirstOrDefault();
@@ -57,6 +71,11 @@ namespace Backend.Repositories
             return player;
         }
 
+        /// <summary>
+        /// Function to get a status by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Status GetStatusById(string id)
         {
             var status = _statusCollection.Find(status => status.Id == id).FirstOrDefault();
@@ -64,6 +83,11 @@ namespace Backend.Repositories
             return status;
         }
 
+        /// <summary>
+        /// Function to get a card by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Card GetCardById(string id)
         {
             var card = _cardCollection.Find(card => card.Id == id).FirstOrDefault();
@@ -71,6 +95,12 @@ namespace Backend.Repositories
             return card;
         }
 
+        /// <summary>
+        /// Function to add a new status to the database
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="anzahl"></param>
+        /// <param name="status"></param>
         public void AddStatus(string name, int anzahl, string status)
         {
             try
@@ -95,7 +125,12 @@ namespace Backend.Repositories
             }
         }
 
-
+        /// <summary>
+        /// Function to update the status by name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="newStatus"></param>
+        /// <returns></returns>
         public bool UpdateStatusByName(string name, string newStatus)
         {
             try
@@ -127,6 +162,12 @@ namespace Backend.Repositories
             }
         }
 
+        /// <summary>
+        /// Function to update the status by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="newStatus"></param>
+        /// <returns></returns>
         public bool UpdateStatusById(string id, string newStatus)
         {
             try
@@ -160,7 +201,5 @@ namespace Backend.Repositories
                 return false;
             }
         }
-
-
     }
 }
