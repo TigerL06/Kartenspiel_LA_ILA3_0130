@@ -32,7 +32,7 @@ namespace Backend.Repositories
             var cards = bsonCards.Select(card => new Card
             {
                 Id = card.Id,
-                Nummer = card.Nummer ?? 0,
+                Nummer = card.Nummer,
                 Farbe = card.Farbe,
                 Spezial = card.Spezial
             }).ToList();
