@@ -21,6 +21,10 @@ namespace Backend.Repositories
             _statusCollection = database.GetCollection<Status>("Spielstand");
         }
 
+        /// <summary>
+        /// Function to get all cards from the database
+        /// </summary>
+        /// <returns></returns>
         public List<Card> GetAllCards()
         {
             var bsonCards = _cardCollection.Find(_ => true).ToList();
@@ -36,6 +40,10 @@ namespace Backend.Repositories
             return cards;
         }
 
+        /// <summary>
+        /// Funktion to get all players from the database
+        /// </summary>
+        /// <returns></returns>
         public List<Player> GetAllPlayers()
         {
             var bsonPlayers = _playerCollection.Find(_ => true).ToList();
@@ -50,6 +58,12 @@ namespace Backend.Repositories
             return players;
         }
 
+
+        /// <summary>
+        /// Function to get a player by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Player GetPlayerById(string id)
         {
             var player = _playerCollection.Find(player => player.Id == id).FirstOrDefault();
