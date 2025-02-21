@@ -4,23 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mehrspieler-Kartenspiel</title>
-    <link rel="stylesheet" href="style.css">
+    <script src="/socket.io/socket.io.js"></script>
     <script src="script.js" defer></script>
-    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <script src="server.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="app">
-        <section id="name-section" class="hidden">
-            <div id="name">
+        <div id="name-section">
+            <h1>Willkommen beim Kartenspiel</h1>
+            <input type="text" id="username" placeholder="Benutzername">
+            <input type="text" id="room" placeholder="Raum">
+            <button id="joinRoom">Beitreten</button>
+        </div>
 
-                <h1>Benutzername</h1>
-                <form id="create-room-form">
-                    <input type="text" id="username" placeholder="Enter your username" required>
-                    <button type="submit" id = "usernameButton">Fertig</button>
-                </form>
-
+        <div id="game" style="display:none;">
+            <div id="top">
+                <h2 id="turnIndicator">Lädt...</h2>
             </div>
-        </section>
+            <div id="main">
+                <h3>Mitte:</h3>
+                <div id="center-card">Keine Karte</div>
+                <div id="players"></div>
+            </div>
+            <div id="cards"></div>
+        </div>
     </div>
 </body>
 </html>
