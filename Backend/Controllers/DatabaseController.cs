@@ -20,12 +20,19 @@ public class DatabaseController : ControllerBase
         return Ok(cards);
     }
 
-    [HttpGet("Players")]
-    public IActionResult GetAllPlayers()
+    [HttpGet("Players/Random")]
+    public IActionResult GetRandomPlayerName()
     {
-        var player = _databaseRepository.GetAllPlayers();
+        var player = _databaseRepository.GetRandomPlayerName();
+
+        if (player == null)
+        {
+            return NotFound(new { message = "Kein Spieler gefunden" });
+        }
+
         return Ok(player);
     }
+
 
     [HttpGet("Players/{id}")]
     public IActionResult GetPlayerById(string id)
