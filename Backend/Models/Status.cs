@@ -1,21 +1,21 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
-public class Status
+
+namespace Backend.Models
 {
-    [BsonId]
-    [BsonRepresentation(BsonType.ObjectId)]
-    public string Id { get; set; }
+    public class Status
+    {
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public required string Id { get; set; }
 
-    [BsonElement("name")]
-    public string Name { get; set; }
+        [BsonElement("name")]
+        public required string Name { get; set; }
 
-    [BsonElement("anzahl")]
-    public int Number { get; set; }
+        [BsonElement("anzahl")]
+        public int Number { get; set; }
 
-
-    [BsonElement("status")]
-    public string status { get; set; }
-
-
-
+        [BsonElement("status")]
+        public required string status { get; set; }
+    }
 }

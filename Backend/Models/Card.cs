@@ -1,18 +1,21 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 
-public class Card
+namespace Backend.Models
 {
-    [BsonId]
-    [BsonRepresentation(BsonType.ObjectId)]
-    public string Id { get; set; }
+    public class Card
+    {
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public required string Id { get; set; }
 
-    [BsonElement("nummer")]
-    public int? Nummer { get; set; } 
+        [BsonElement("nummer")]
+        public int? Nummer { get; set; }
 
-    [BsonElement("farbe")]
-    public string Farbe { get; set; }
+        [BsonElement("farbe")]
+        public required string Farbe { get; set; }
 
-    [BsonElement("spezial")]
-    public string Spezial { get; set; }
+        [BsonElement("spezial")]
+        public required string Spezial { get; set; }
+    }
 }
