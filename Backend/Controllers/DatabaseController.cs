@@ -1,4 +1,5 @@
-﻿using Backend.Repositories;
+﻿using Backend.Models;
+using Backend.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
@@ -55,31 +56,33 @@ public class DatabaseController : ControllerBase
     [HttpGet("Status/{id}")]
     public IActionResult GetStatusById(string id)
     {
-        var player = _databaseRepository.GetStatusById(id);
+        var status = _databaseRepository.GetStatusById(id);
 
-        if (player == null)
+        if (status == null)
         {
-            return NotFound(new { message = "Player not found" });
+            return NotFound(new { message = "Status nicht gefunden" });
         }
 
-        return Ok(player);
+        return Ok(status);
     }
 
-    [HttpPut]
-    [Route("Status/Update")]
+
+    [HttpPut("Status/Update")]
     public IActionResult UpdateStatus([FromQuery] string name, [FromQuery] string newStatus)
     {
         var result = _databaseRepository.UpdateStatusByName(name, newStatus);
 
         if (result)
         {
-            return Ok($"Der Status für '{name}' wurde erfolgreich geändert zu '{newStatus}'.");
+            return Ok($"Der Status für '{name}' wurde erfolgreich auf '{newStatus}' geändert.");
         }
         else
         {
             return NotFound($"Kein Status mit dem Namen '{name}' gefunden.");
         }
     }
+
+
 
     [HttpPut("Status/Update/{id}")]
     public IActionResult UpdateStatusById(string id, [FromQuery] string newStatus)
@@ -88,7 +91,7 @@ public class DatabaseController : ControllerBase
 
         if (result)
         {
-            return Ok($"Der Status für die ID '{id}' wurde erfolgreich geändert zu '{newStatus}'.");
+            return Ok($"Der Status für die ID '{id}' wurde erfolgreich auf '{newStatus}' geändert.");
         }
         else
         {
@@ -96,14 +99,22 @@ public class DatabaseController : ControllerBase
         }
     }
 
-    [HttpPost]
-    [Route("Status")]
-    public IActionResult CreateStatus([FromQuery] string name, [FromQuery] int anzahl, [FromQuery] string status)
+    [HttpPost("Status")]
+    public IActionResult CreateStatus([FromBody] StatusRequestDto request)
     {
         try
         {
-            _databaseRepository.AddStatus(name, anzahl, status);
-            return Ok($"Status mit Name '{name}', Anzahl Spielern '{anzahl}' und Status '{status}' erfolgreich hinzugefügt.");
+            _databaseRepository.AddStatus(
+                request.Name,
+                request.Number,
+                request.CurrentUserNumber,
+                request.Status,
+                request.MixedCards,
+                request.LaidCards
+            );
+
+            return Ok($"Status mit Name '{request.Name}', Anzahl Spielern '{request.Number}', aktueller Spieler '{request.CurrentUserNumber}', " +
+                      $"Status '{request.Status}', gemischten Karten und gelegten Karten erfolgreich hinzugefügt.");
         }
         catch (Exception ex)
         {
@@ -111,8 +122,29 @@ public class DatabaseController : ControllerBase
         }
     }
 
+    [HttpGet("Group/NextPlayer/{groupName}")]
+    public IActionResult GetNextPlayerNumber(string groupName)
+    {
+        var updatedNumber = _databaseRepository.IncrementCurrentUserNumber(groupName);
 
+        if (updatedNumber == -1)
+        {
+            return NotFound($"Keine Gruppe mit dem Namen '{groupName}' gefunden.");
+        }
 
+        return Ok(new { message = $"Nächster Spieler gesetzt auf {updatedNumber}", currentUserNumber = updatedNumber });
+    }
 
+    [HttpGet("Cards/Shuffle/{groupName}")]
+    public IActionResult ShuffleCards(string groupName)
+    {
+        var shuffledDeck = _databaseRepository.ShuffleAndStoreDeck(groupName);
 
+        if (shuffledDeck == null || shuffledDeck.Length == 0)
+        {
+            return BadRequest($"Fehler beim Mischen der Karten für die Gruppe '{groupName}'.");
+        }
+
+        return Ok(new { message = "Karten erfolgreich gemischt", mixedCards = shuffledDeck });
+    }
 }

@@ -101,22 +101,22 @@ namespace Backend.Repositories
         /// <param name="name"></param>
         /// <param name="anzahl"></param>
         /// <param name="status"></param>
-        public void AddStatus(string name, int anzahl, string status)
+        public void AddStatus(string name, int number, int currentUserNumber, string status, string[] mixedCards, string[] laidCards)
         {
             try
             {
-                // Neues Status-Objekt erstellen
                 var newStatus = new Status
                 {
-                    Id = ObjectId.GenerateNewId().ToString(), // Automatische Generierung einer ID
+                    Id = ObjectId.GenerateNewId().ToString(),
                     Name = name,
-                    Number = anzahl, // Anzahl der Spieler
-                    status = status
+                    Number = number,
+                    CurrentUserNumber = currentUserNumber,
+                    status = status,
+                    mixedCards = mixedCards,
+                    laidCards = laidCards
                 };
 
-                // Status-Dokument in die Collection einfügen
                 _statusCollection.InsertOne(newStatus);
-
                 Console.WriteLine("Status erfolgreich hinzugefügt.");
             }
             catch (Exception ex)
@@ -200,6 +200,46 @@ namespace Backend.Repositories
                 Console.WriteLine($"Fehler beim Aktualisieren des Status: {ex.Message}");
                 return false;
             }
+        }
+
+        public int IncrementCurrentUserNumber(string groupName)
+        {
+            var filter = Builders<Status>.Filter.Eq(s => s.Name, groupName);
+            var groupStatus = _statusCollection.Find(filter).FirstOrDefault();
+
+            if (groupStatus == null)
+            {
+                return -1; // Gruppe nicht gefunden
+            }
+
+            // Erhöhe den `CurrentUserNumber` und falls er größer als `Number` ist, setze ihn zurück auf 1
+            int newCurrentUserNumber = (groupStatus.CurrentUserNumber % groupStatus.Number) + 1;
+
+            var update = Builders<Status>.Update.Set(s => s.CurrentUserNumber, newCurrentUserNumber);
+            _statusCollection.UpdateOne(filter, update);
+
+            return newCurrentUserNumber;
+        }
+
+        public string[] ShuffleAndStoreDeck(string groupName)
+        {
+            var allCards = _cardCollection.Find(_ => true).ToList();
+
+            if (allCards.Count == 0)
+            {
+                return new string[0]; // Keine Karten vorhanden
+            }
+
+            // Mische die Karten
+            var shuffledCards = allCards.OrderBy(_ => Guid.NewGuid()).Select(c => c.Id).ToArray();
+
+            // Speichere das gemischte Deck in `mixedCards` des `Status`-Dokuments der Gruppe
+            var filter = Builders<Status>.Filter.Eq(s => s.Name, groupName);
+            var update = Builders<Status>.Update.Set(s => s.mixedCards, shuffledCards);
+
+            _statusCollection.UpdateOne(filter, update);
+
+            return shuffledCards;
         }
     }
 }
