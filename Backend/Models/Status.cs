@@ -12,10 +12,19 @@ namespace Backend.Models
         [BsonElement("name")]
         public required string Name { get; set; }
 
-        [BsonElement("anzahl")]
+        [BsonElement("anzahl Spieler")]
         public int Number { get; set; }
+
+        [BsonElement]
+        public int CurrentUserNumber { get; set; }
 
         [BsonElement("status")]
         public required string status { get; set; }
+
+        [BsonElement]
+        public required string[] mixedCards { get; set; }
+
+        [BsonElement]
+        public required string[] laidCards { get; set; }
     }
 }
