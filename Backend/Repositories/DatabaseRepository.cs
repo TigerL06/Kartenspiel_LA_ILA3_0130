@@ -44,19 +44,21 @@ namespace Backend.Repositories
         /// Funktion to get all players from the database
         /// </summary>
         /// <returns></returns>
-        public List<Player> GetAllPlayers()
+        public Player? GetRandomPlayerName()
         {
-            var bsonPlayers = _playerCollection.Find(_ => true).ToList();
+            var allPlayers = _playerCollection.Find(_ => true).ToList();
 
-            var players = bsonPlayers.Select(player => new Player
+            if (allPlayers.Count == 0)
             {
-                Id = player.Id,
-                Name = player.Name,
+                return null; // Falls keine Spieler in der Datenbank sind
+            }
 
-            }).ToList();
+            var random = new Random();
+            int randomIndex = random.Next(allPlayers.Count); // Zufälligen Index wählen
 
-            return players;
+            return allPlayers[randomIndex];
         }
+
 
 
         /// <summary>
