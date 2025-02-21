@@ -241,5 +241,17 @@ namespace Backend.Repositories
 
             return shuffledCards;
         }
+
+        // Hinzugefügte Methode: Status anhand des Namens abrufen
+        public Status GetStatusByName(string name)
+        {
+            return _statusCollection.Find(s => s.Name == name).FirstOrDefault();
+        }
+
+        // Hinzugefügte Methode: Komplettes Status-Dokument aktualisieren
+        public void UpdateStatus(Status status)
+        {
+            _statusCollection.ReplaceOne(s => s.Id == status.Id, status);
+        }
     }
 }
