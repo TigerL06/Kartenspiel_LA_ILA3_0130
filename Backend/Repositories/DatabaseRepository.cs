@@ -103,7 +103,7 @@ namespace Backend.Repositories
         /// <param name="name"></param>
         /// <param name="anzahl"></param>
         /// <param name="status"></param>
-        public void AddStatus(string name, int number, int currentUserNumber, string status, string[] mixedCards, string[] laidCards)
+        public void AddStatus(string name, int number, string[] playerName ,int currentUserNumber, string status, string[] mixedCards, string[] laidCards)
         {
             try
             {
@@ -112,6 +112,7 @@ namespace Backend.Repositories
                     Id = ObjectId.GenerateNewId().ToString(),
                     Name = name,
                     Number = number,
+                    PlayerName = playerName,
                     CurrentUserNumber = currentUserNumber,
                     status = status,
                     mixedCards = mixedCards,
@@ -163,6 +164,7 @@ namespace Backend.Repositories
                 return false;
             }
         }
+        
 
         /// <summary>
         /// Function to update the status by id
@@ -200,6 +202,23 @@ namespace Backend.Repositories
             catch (Exception ex)
             {
                 Console.WriteLine($"Fehler beim Aktualisieren des Status: {ex.Message}");
+                return false;
+            }
+        }
+
+        public bool AddPlayerNameToStatus(string statusId, string playerName)
+        {
+            try
+            {
+                var filter = Builders<Status>.Filter.Eq(s => s.Id, statusId);
+                var update = Builders<Status>.Update.AddToSet(s => s.PlayerName, playerName);
+                var result = _statusCollection.UpdateOne(filter, update);
+
+                return result.MatchedCount > 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Fehler beim Hinzufügen des Spielernamens: {ex.Message}");
                 return false;
             }
         }
@@ -251,7 +270,7 @@ namespace Backend.Repositories
         }
 
         // Hinzugefügte Methode: Komplettes Status-Dokument aktualisieren
-        public void UpdateStatus(Status status)
+        public void UpdateStatus(string name, int number, Status status)
         {
             _statusCollection.ReplaceOne(s => s.Id == status.Id, status);
         }
