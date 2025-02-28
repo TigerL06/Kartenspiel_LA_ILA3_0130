@@ -1,4 +1,4 @@
-let nameButton = document.querySelector("#usernameButton")
+let nameButton = document.querySelector("#joinRoom")
 let parent = document.querySelector("#app")
 let section = document.querySelector("#name-section")
 let username;
