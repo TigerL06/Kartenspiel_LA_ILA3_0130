@@ -8,7 +8,7 @@ const server = http.createServer(app);
 const io = new Server(server);
 
 // Statische Dateien bereitstellen (HTML, CSS, JS)
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(__dirname));
 
 // Route für den Root-Pfad (Startseite)
 app.get("/", (req, res) => {
