@@ -5,6 +5,8 @@ let section = document.querySelector("#name-section")
 let username;
 let groupename;
 let room;
+let test;
+let statusId;
 
 nameButton.addEventListener("click", function() {
     console.log("gut")
@@ -99,6 +101,13 @@ function game() {
         }
         
         socket.emit("joinRoom", { username, room });
+        fetchStatusByName(room);
+        if(test = false){
+            createStatus();
+        }else {
+            addPlayerName();
+        }
+
     });
 }
 
@@ -201,4 +210,187 @@ function positionPlayers() {
         player.style.top = y;
         player.style.transform = "translate(-50%, -50%)"; // Zentrierung
     });
+}
+
+async function createStatus() {
+    const name = document.getElementById("groupe").value;
+    groupename = document.getElementById("groupe").value;
+    const messageElement = document.getElementById("responseMessage");
+
+    if (!name || !groupName) {
+        messageElement.style.color = "red";
+        messageElement.innerText = "Bitte Name und Gruppenname eingeben.";
+        return;
+    }
+
+    try {
+        // 1. Karten mischen durch GET-Anfrage
+        const shuffleResponse = await fetch(`https://localhost:7079/api/Database/Cards/Shuffle/${groupName}`, {
+            method: "GET",
+            headers: { "Content-Type": "application/json" }
+        });
+
+        // 2. POST-Anfrage mit gemischten Karten senden
+        const requestData = {
+            Name: name,
+            Number: 1,
+            PlayerName: [username],
+            CurrentUserNumber: 0,
+            Status: "going",
+            MixedCards: [],
+            LaidCards: []
+        };
+
+        const response = await fetch("https://localhost:7079/api/Database/Status", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(requestData)
+        });
+
+        if (response.ok) {
+            const data = await response.text();
+            messageElement.style.color = "green";
+            messageElement.innerText = `Erfolg: ${data}`;
+        } else {
+            const errorMessage = await response.text();
+            messageElement.style.color = "red";
+            messageElement.innerText = `Fehler: ${errorMessage}`;
+        }
+    } catch (error) {
+        console.error("Netzwerkfehler:", error);
+        messageElement.style.color = "red";
+        messageElement.innerText = "Netzwerkfehler. API nicht erreichbar?";
+    }
+}
+
+async function addPlayerName() {
+    try {
+        const response = await fetch("https://localhost:7079/api/Database/Status/AddPlayerName", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                statusId: statusId,
+                playerName: username
+            })
+        });
+        
+        const data = await response.text();
+        
+        if (response.ok) {
+            document.getElementById("responseMessage").innerText = `Erfolg: ${data}`;
+        } else {
+            document.getElementById("responseMessage").innerText = `Fehler: ${data}`;
+        }
+    } catch (error) {
+        console.error("Netzwerkfehler:", error);
+        document.getElementById("responseMessage").innerText = "Netzwerkfehler. API nicht erreichbar?";
+    }
+}
+
+
+async function getNextPlayer(groupName) {
+    try {
+        const response = await fetch(`https://localhost:7079/api/Database/Group/NextPlayer/${groupName}`);
+        if (!response.ok) {
+            throw new Error(`Fehler beim Abrufen des nächsten Spielers: ${response.statusText}`);
+        }
+        const data = await response.json();
+        console.log(data.message, data.currentUserNumber);
+        return data;
+    } catch (error) {
+        console.error('Error in getNextPlayer:', error);
+        return null;
+    }
+}
+async function shuffleCards(groupName) {
+    try {
+        const response = await fetch(`https://localhost:7079/api/Database/Cards/Shuffle/${groupName}`);
+        if (!response.ok) {
+            throw new Error(`Fehler beim Mischen der Karten: ${response.statusText}`);
+        }
+        const data = await response.json();
+        console.log(data.message, data.mixedCards);
+        return data;
+    } catch (error) {
+     console.error('Error in shuffleCards:', error);
+        return null;
+    }
+}
+(async () => {
+    const groupName = 'MeineGruppe';
+    const nextPlayer = await getNextPlayer(groupName);
+    const shuffled = await shuffleCards(groupName);
+})();
+
+async function fetchSevenCards(playerName) {
+    try {
+        const response = await fetch(`https://localhost:7079/api/Database/Status/GetSevenCards?name=${encodeURIComponent(playerName)}`);
+        if (!response.ok) {
+            throw new Error('Keine Karten verfügbar');
+        }
+        const data = await response.json();
+        console.log('Sieben Karten:', data);
+        // Hier kannst du die Karten im UI anzeigen
+    } catch (error) {
+        console.error('Fehler:', error);
+    }
+}
+
+async function getStatusById() {
+    const statusId = document.getElementById("statusId").value;
+    const url = new URL(`https://localhost:7079/api/Database/Status/${statusId}`);
+    const messageElement = document.getElementById("responseMessage");
+
+    // Falls kein statusId eingegeben wurde, abbrechen
+    if (!statusId) {
+        messageElement.innerText = "Bitte Status-ID eingeben.";
+        return;
+    }
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+
+        if (response.ok) {
+            const data = await response.text();
+            messageElement.style.color = "green";
+            messageElement.innerText = `Erfolg: ${data}`;
+        } else {
+            const errorMessage = await response.text();
+            messageElement.style.color = "red";
+            messageElement.innerText = `Fehler: ${errorMessage}`;
+        }
+    } catch (error) {
+        console.error("Netzwerkfehler:", error);
+        messageElement.innerText = "Netzwerkfehler. API nicht erreichbar?";
+    }
+}
+
+async function fetchStatusByName(playerName) {
+    const response = await fetch(`https://localhost:7079/api/Database/Status/GetByName?name=${encodeURIComponent(playerName)}`);
+    if (!response.ok) {
+        throw new Error('Kein Status verfügbar');
+    }
+    const data = await response.text(); // Liest den Antwort-Text aus
+    if (data === "No Status") {
+        console.log("Kein Status vorhanden");
+        test = false;
+        // Weitere Logik, wenn kein Status existiert
+    } else {
+        // Falls du erwartest, dass die Antwort ein JSON-Objekt ist, kannst du versuchen, es zu parsen:
+        try {
+            const jsonData = JSON.parse(data);
+            console.log("Spieler Status:", jsonData);
+            statusId = jsonData.id;
+            console.log(statusId);
+        } catch (error) {
+            console.log("Spieler Status (als Text):", data);
+        }
+    }
 }
