@@ -1,19 +1,45 @@
+const socket = io();
 let nameButton = document.querySelector("#joinRoom")
 let parent = document.querySelector("#app")
 let section = document.querySelector("#name-section")
 let username;
 let groupename;
-const socket = io();
 let room;
 
 nameButton.addEventListener("click", function() {
+    console.log("gut")
     let text = document.querySelector("#username");
-    username = text.value; // Nutze .value anstelle von .textContent
+    if(text.value){
+        username = text.value;
+    } // Nutze .value anstelle von .textContent
 
     console.log(username); // Zeigt den eingegebenen Wert in der Konsole an
     section.remove();
-    game();
+    if(text.value){
+        game()
+    }
+    if(!text.value){
+        getPlayerName();
+    }
 })
+async function getPlayerName(){
+    try {
+        const response = await fetch("https://localhost:7079/api/Database/Players/Random", { mode: "cors" });
+
+        if (!response.ok) {
+            throw new Error("Netzwerkantwort war nicht ok: " + response.status);
+        }
+        const data = await response.json();
+        // Angenommen, die Response enthält direkt den Spielernamen oder ein Objekt mit der Eigenschaft "name"
+        // Falls es ein Objekt ist, z.B. { name: "NeuerName" }, dann:
+        username = data.name || data;
+        console.log("Neuer Spielername:", username);
+        game();
+    } catch (error) {
+        console.error("Fehler beim Abrufen des Spielernamens:", error);
+    }
+}
+
 
 function game() {
     let main = document.createElement("div");
@@ -22,11 +48,13 @@ function game() {
     let top = document.createElement("div");
     top.setAttribute("id", "top");
     let name = document.createElement("h3");
+    name.setAttribute("id", "username")
     name.innerHTML = username;
     let groupe = document.createElement("input");
     groupe.setAttribute("id", "groupe");
     let groupeButton = document.createElement("button");
     groupeButton.innerHTML = "Join";
+    groupeButton.setAttribute("id", "joinRooms")
 
     let game = document.createElement("div");
     game.setAttribute("id", "game");
@@ -39,6 +67,12 @@ function game() {
 
     let cards = document.createElement("div");
     cards.setAttribute("id", "cards");
+
+    let nameSection = document.createElement("div");
+    nameSection.setAttribute("id", "name-section");
+
+    let section = document.createElement("div");
+    section.setAttribute("id", "sections");
 
     top.appendChild(name);
     top.appendChild(groupe);
@@ -54,6 +88,17 @@ function game() {
         console.log(groupename);
         createPlayers();
         createCards();
+    });
+
+    document.getElementById("joinRooms").addEventListener("click", () => {
+        room = document.querySelector("#groupe").value;
+    
+        if (!username || !room) {
+            alert("Bitte Benutzernamen und Raum eingeben!");
+            return;
+        }
+        
+        socket.emit("joinRoom", { username, room });
     });
 }
 
@@ -157,40 +202,3 @@ function positionPlayers() {
         player.style.transform = "translate(-50%, -50%)"; // Zentrierung
     });
 }
-
-
-document.getElementById("joinRoom").addEventListener("click", () => {
-    username = document.getElementById("username").value;
-    room = document.getElementById("room").value;
-
-    if (!username || !room) {
-        alert("Bitte Benutzernamen und Raum eingeben!");
-        return;
-    }
-
-    document.getElementById("name-section").style.display = "none";
-    document.getElementById("game").style.display = "block";
-
-    socket.emit("joinRoom", { username, room });
-});
-
-socket.on("updatePlayers", (players) => {
-    let playersDiv = document.getElementById("players");
-    playersDiv.innerHTML = "";
-    players.forEach(player => {
-        let playerDiv = document.createElement("div");
-        playerDiv.classList.add("player");
-        playerDiv.innerHTML = `<strong>${player.name}</strong> (Karten: ${player.cards.length})`;
-        playersDiv.appendChild(playerDiv);
-    });
-});
-
-socket.on("updateGame", ({ currentCard, turn }) => {
-    document.getElementById("center-card").innerText = currentCard;
-    document.getElementById("turnIndicator").innerText = `Am Zug: ${turn}`;
-});
-
-socket.on("gameOver", (message) => {
-    alert(message);
-    location.reload();
-});

@@ -225,4 +225,15 @@ public class DatabaseController : ControllerBase
         return Ok($"Karte '{request.CardId}' zu laidCards hinzugefügt.");
     }
 
+    [HttpGet("Status/GetByName")]
+    public IActionResult GetStatusByName([FromQuery] string name)
+    {
+        var status = _databaseRepository.GetStatusByName(name);
+        if (status == null)
+        {
+            return Ok("No Status");
+        }
+        return Ok(status);
+    }
+
 }
