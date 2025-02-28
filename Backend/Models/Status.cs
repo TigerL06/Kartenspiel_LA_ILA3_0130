@@ -15,6 +15,8 @@ namespace Backend.Models
         [BsonElement("anzahl Spieler")]
         public int Number { get; set; }
 
+        public string[] PlayerName { get; set; }
+
         [BsonElement]
         public int CurrentUserNumber { get; set; }
 

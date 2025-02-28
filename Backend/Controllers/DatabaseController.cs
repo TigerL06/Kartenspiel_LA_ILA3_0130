@@ -114,6 +114,7 @@ public class DatabaseController : ControllerBase
             _databaseRepository.AddStatus(
                 request.Name,
                 request.Number,
+                request.PlayerName,
                 request.CurrentUserNumber,
                 request.Status,
                 request.MixedCards,
@@ -126,6 +127,21 @@ public class DatabaseController : ControllerBase
         catch (Exception ex)
         {
             return BadRequest($"Fehler beim Erstellen des Status: {ex.Message}");
+        }
+    }
+
+    [HttpPut("Status/AddPlayerName")]
+    public IActionResult AddPlayerName([FromQuery] string statusId, [FromQuery] string playerName)
+    {
+        var result = _databaseRepository.AddPlayerNameToStatus(statusId, playerName);
+
+        if (result)
+        {
+            return Ok($"Spielername '{playerName}' wurde erfolgreich zum Status mit der ID '{statusId}' hinzugefügt.");
+        }
+        else
+        {
+            return NotFound($"Kein Status mit der ID '{statusId}' gefunden.");
         }
     }
 
@@ -156,99 +172,57 @@ public class DatabaseController : ControllerBase
     }
 
 
-    // 1. Get-Request: Sieben Karten abholen und aus mixedCards entfernen
-    // URL: api/Database/Status/GetSevenCards?name=StatusName
     [HttpGet("Status/GetSevenCards")]
     public IActionResult GetSevenCards([FromQuery] string name)
     {
         var status = _databaseRepository.GetStatusByName(name);
-        if (status == null)
-        {
-            return NotFound($"Status mit dem Namen '{name}' wurde nicht gefunden.");
-        }
+        if (status == null || status.mixedCards.Length == 0)
+            return NotFound("Keine Karten verfügbar.");
 
-        if (status.mixedCards == null || !status.mixedCards.Any())
-        {
-            return NotFound("Keine Karten im gemischten Karten-Array vorhanden.");
-        }
-
-        int count = Math.Min(7, status.mixedCards.Length);
-        var cardsToReturn = status.mixedCards.Take(count).ToArray();
-
-        // Entferne die ausgegebenen Karten aus dem mixedCards-Array
-        status.mixedCards = status.mixedCards.Skip(count).ToArray();
-
-        _databaseRepository.UpdateStatus(status);
+        var cardsToReturn = status.mixedCards.Take(7).ToArray();
+        status.mixedCards = status.mixedCards.Skip(7).ToArray();
+        _databaseRepository.UpdateStatus(status.Name, status.Number, status);
 
         return Ok(cardsToReturn);
     }
 
-    // 2. Get-Request: Eine Karte abholen und aus mixedCards entfernen
-    // URL: api/Database/Status/GetOneCard?name=StatusName
     [HttpGet("Status/GetOneCard")]
     public IActionResult GetOneCard([FromQuery] string name)
     {
         var status = _databaseRepository.GetStatusByName(name);
-        if (status == null)
-        {
-            return NotFound($"Status mit dem Namen '{name}' wurde nicht gefunden.");
-        }
-
-        if (status.mixedCards == null || !status.mixedCards.Any())
-        {
-            return NotFound("Keine Karten im gemischten Karten-Array vorhanden.");
-        }
+        if (status == null || status.mixedCards.Length == 0)
+            return NotFound("Keine Karten verfügbar.");
 
         var card = status.mixedCards.First();
         status.mixedCards = status.mixedCards.Skip(1).ToArray();
-
-        _databaseRepository.UpdateStatus(status);
+        _databaseRepository.UpdateStatus(status.Name, status.Number, status);
 
         return Ok(card);
     }
 
-    // 3. Get-Request: Alle laidCards in das mixedCards-Array hinzufügen
-    // URL: api/Database/Status/RefillMixedCards?groupName=StatusName
     [HttpGet("Status/RefillMixedCards")]
     public IActionResult RefillMixedCards([FromQuery] string groupName)
     {
         var status = _databaseRepository.GetStatusByName(groupName);
-        if (status == null)
-        {
-            return NotFound($"Status mit dem Namen '{groupName}' wurde nicht gefunden.");
-        }
-
-        if (status.laidCards == null || !status.laidCards.Any())
-        {
-            return BadRequest("Keine gelegten Karten vorhanden, um sie hinzuzufügen.");
-        }
+        if (status == null || status.laidCards.Length == 0)
+            return BadRequest("Keine gelegten Karten zum Hinzufügen.");
 
         status.mixedCards = status.mixedCards.Concat(status.laidCards).ToArray();
-        // Optional: status.laidCards = new string[0]; // falls man die gelegten Karten "entfernen" will
-        _databaseRepository.UpdateStatus(status);
+        _databaseRepository.UpdateStatus(status.Name, status.Number, status);
 
         return Ok(status.mixedCards);
     }
 
-    // 4. Post-Request: Eine Karte zur laidCards-Liste hinzufügen
-    // URL: api/Database/Status/AddLaidCard
-    // Erwarteter JSON-Body: { "Name": "StatusName", "CardId": "KartenId" }
     [HttpPost("Status/AddLaidCard")]
     public IActionResult AddLaidCard([FromBody] AddLaidCardDto request)
     {
         var status = _databaseRepository.GetStatusByName(request.Name);
-        if (status == null)
-        {
-            return NotFound($"Status mit dem Namen '{request.Name}' wurde nicht gefunden.");
-        }
+        if (status == null) return NotFound($"Status '{request.Name}' nicht gefunden.");
 
-        var laidCardsList = status.laidCards.ToList();
-        laidCardsList.Add(request.CardId);
-        status.laidCards = laidCardsList.ToArray();
+        status.laidCards = status.laidCards.Append(request.CardId).ToArray();
+        _databaseRepository.UpdateStatus(status.Name, status.Number, status);
 
-        _databaseRepository.UpdateStatus(status);
-
-        return Ok($"Karte mit ID '{request.CardId}' wurde zu laidCards hinzugefügt.");
+        return Ok($"Karte '{request.CardId}' zu laidCards hinzugefügt.");
     }
 
 }
