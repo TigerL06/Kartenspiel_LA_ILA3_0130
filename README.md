@@ -82,7 +82,7 @@ In diesem Projekt setzen wir die klassische Karten-Spielmechanik in einer Webanw
 | 4  |   24.01.2025	   |     Müller      |      Die Webseite wird als Single Page Application umgesetzt wird.        |       60 min        |
 | 5  |   31.01.2025    |     Manojlovic, Tuma      |   Ich kann eine Gruppe/ Raum erstellen um zu spielen.  |       180 min        |
 | 6  |   31.01.2025    |     Müller      |       Ich kann mir einen Benutzernamen geben.       |       90 min        |
-| 7  |   31.01.2025    |     Manojlovc, Müller, Tuma      |       Man kann das Spiel in einer Gruppe/ Raum spielen.        |       180 min        |
+| 7  |   31.01.2025    |     Müller      |       Man kann das Spiel in einer Gruppe/ Raum spielen.        |       180 min        |
 | 8  |   31.01.2025    |     Koch, Sacher      |       Die Daten werden in einer MongoDB Datenbank gespeichert.       |      180 min         |
 | 9  |    21.02.2025   |     Koch, Sacher      |       Das Frontend holt die Daten für das Spiel über das Backend.       |       120 min        |
 | 10  |   21.02.2025    |    Tuma       |       Beim Starten des Spiels werden die Karten ausgeteilt.       |      90 min         |
