@@ -43,7 +43,6 @@ In diesem Projekt setzen wir die klassische Karten-Spielmechanik in einer Webanw
 | 13  | Muss            | Funktional    | Der Spielstand und die Züge der Spieler werden gespeichert.           |
 | 14  | Muss            | Funktional    | Die Webseite ist für das Spielen online zugänglich.                   |
 
-✍️ Jede User Story hat eine ganzzahlige Nummer (1, 2, 3 etc.), eine Verbindlichkeit (Muss oder Kann?), und einen Typ (Funktional, Qualität, Rand). Die User Story selber hat folgende Form: _Als ein 🤷‍♂️ möchte ich 🤷‍♂️, damit 🤷‍♂️_.
 
 ### 1.3 Testfälle
 
@@ -65,7 +64,7 @@ In diesem Projekt setzen wir die klassische Karten-Spielmechanik in einer Webanw
 | 13.1 | Spiel ist gestartet                                                                   | Ein Zug wird abgeschlossen                                                                    | Der aktuelle Spielstand inklusive aller bisherigen Züge wird in der MongoDB gespeichert                                    |
 | 14.1 | Die Webseite ist vollständig implementiert                                            | Ein Benutzer greift über einen Browser auf die Webseite zu                                    | Die Webseite wird erfolgreich geladen und ist spielbar                                                                     |
 
-✍️ Die Nummer hat das Format `N.m`, wobei `N` die Nummer der User Story ist, die der Testfall abdeckt, und `m` von `1` an nach oben gezählt. Beispiel: Der dritte Testfall, der die zweite User Story abdeckt, hat also die Nummer `2.3`.
+
 
 ### 1.4 Diagramme
 
@@ -92,9 +91,7 @@ In diesem Projekt setzen wir die klassische Karten-Spielmechanik in einer Webanw
 
 Total:
 
-✍️ Die Nummer hat das Format `N.m`, wobei `N` die Nummer der User Story ist, auf die sich das Arbeitspaket bezieht, und `m` von `A` an nach oben buchstabiert. Beispiel: Das dritte Arbeitspaket, das die zweite User Story betrifft, hat also die Nummer `2.C`.
 
-✍️ Ein Arbeitspaket sollte etwa 45' für eine Person in Anspruch nehmen. Die totale Anzahl Arbeitspakete sollte etwa Folgendem entsprechen: `Anzahl R-Sitzungen` ╳ `Anzahl Gruppenmitglieder` ╳ `4`. Wenn Sie also zu dritt an einem Projekt arbeiten, für welches zwei R-Sitzungen geplant sind, sollten Sie auf `2` ╳ `3` ╳`4` = `24` Arbeitspakete kommen. Sollten Sie merken, dass Sie hier nicht genügend Arbeitspakte haben, denken Sie sich weitere "Kann"-User Stories für Kapitel 1.2 aus.
 
 ## 3 Entscheiden
 
@@ -119,7 +116,6 @@ Wir haben uns dazu entschieden, das Projekt gemäss der Planung umzusetzen.
 | 13   | 28.02.2025 | Müller           | 90 min        | 90 min            |
 | 14   | 28.02.2025 | Team             | 30 min        | 30 min            |
 
-✍️ Tragen Sie jedes Mal, wenn Sie ein Arbeitspaket abschließen, hier ein, wie lang Sie effektiv dafür hatten.
 
 ## 5 Kontrollieren
 
