@@ -120,9 +120,9 @@ Total:
 ✍️ Vergessen Sie nicht, ein Fazit hinzuzufügen, welches das Test-Ergebnis einordnet.
 
 ## 6 Auswerten
-Hier geht es zu den POrtfoliobeiträgen:
+Die Auswertung haben wir auf Mahara gemacht.
 
-- Liam Koch:
+- Liam Koch: https://portfolio.bbbaden.ch/view/view.php?t=eafeff039500f88255cc
 - Robin Sacher: https://portfolio.bbbaden.ch/view/view.php?t=a066ccbee88f0f846c1e
 - Damian Müller
 - Cedric Tuma:
