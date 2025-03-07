@@ -150,4 +150,4 @@ Die Auswertung haben wir auf Mahara gemacht.
 - Robin Sacher: https://portfolio.bbbaden.ch/view/view.php?t=a066ccbee88f0f846c1e
 - Damian Müller: https://portfolio.bbbaden.ch/view/view.php?t=0a86ee2bf20813a899d7
 - Cedric Tuma:
-- Nicola Manojlovic:
+- Nikola Manojlovic:
