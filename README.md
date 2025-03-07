@@ -120,5 +120,10 @@ Total:
 ✍️ Vergessen Sie nicht, ein Fazit hinzuzufügen, welches das Test-Ergebnis einordnet.
 
 ## 6 Auswerten
+Hier geht es zu den POrtfoliobeiträgen:
 
-✍️ Fügen Sie hier eine Verknüpfung zu Ihrem Lern-Bericht ein.
+- Liam Koch:
+- Robin Sacher: https://portfolio.bbbaden.ch/view/view.php?t=a066ccbee88f0f846c1e
+- Damian Müller
+- Cedric Tuma:
+- Nicola Manojlovic:
