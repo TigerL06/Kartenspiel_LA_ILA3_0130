@@ -91,7 +91,8 @@ In diesem Projekt setzen wir die klassische Karten-Spielmechanik in einer Webanw
 
 Total:
 
-###![Lernatelier2Diagramm drawio](https://github.com/user-attachments/assets/d108c72d-4dd2-4875-8e62-f374c1f902f2)
+### UseCase Diagramm
+![Lernatelier2Diagramm drawio](https://github.com/user-attachments/assets/d108c72d-4dd2-4875-8e62-f374c1f902f2)
 
 
 
