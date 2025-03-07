@@ -104,19 +104,19 @@ Wir haben uns dazu entschieden, das Projekt gemäss der Planung umzusetzen.
 
 | AP-№ | Datum      | Zuständig        | geplante Zeit | tatsächliche Zeit |
 | ---- | ---------- | ---------------- | ------------- | ----------------- |
-| 1    | 24.01.2025 | Team             | 45 min        | 30 min            |
-| 2    | 24.01.2025 | Team             | 15 min        | 15 min            |
+| 1    | 24.01.2025 | Team             | 45 min        | 45 min            |
+| 2    | 24.01.2025 | Team             | 15 min        | 20 min            |
 | 3    | 24.01.2025 | Koch, Sacher     | 15 min        | 30 min            |
-| 4    | 24.01.2025 | Müller           | 60 min        | 60 min            |
-| 5    | 31.01.2025 | Tuma, Manojlovic | 180 min       | 180 min           |
-| 6    | 31.01.2025 | Müller           | 90 min        | 70 min            |
-| 7    | 31.01.2025 | Müller           | 180 min       | 200 min           |
-| 8    | 31.01.2025 | Koch, Sacher     | 180 min       | 200 min           |
-| 9    | 21.02.2025 | Koch, Sacher     | 120 min       | 100 min           |
-| 10   | 21.02.2025 | Tuma             | 90 min        | 100 min           |
-| 11   | 21.02.2025 | Tuma, Manojlovic | 60 min        | 60 min            |
-| 12   | 28.02.2025 | Manojlovic       | 60 min        | 60 min            |
-| 13   | 28.02.2025 | Müller           | 90 min        | 90 min            |
+| 4    | 24.01.2025 | Müller           | 60 min        | 80 min            |
+| 5    | 31.01.2025 | Tuma, Manojlovic | 180 min       | 220 min           |
+| 6    | 31.01.2025 | Müller           | 90 min        | 120 min            |
+| 7    | 31.01.2025 | Müller           | 180 min       | -           |
+| 8    | 31.01.2025 | Koch, Sacher     | 180 min       | 220 min           |
+| 9    | 21.02.2025 | Koch, Sacher     | 120 min       | 140 min           |
+| 10   | 21.02.2025 | Tuma             | 90 min        | -          |
+| 11   | 21.02.2025 | Tuma, Manojlovic | 60 min        | -            |
+| 12   | 28.02.2025 | Manojlovic       | 60 min        | -            |
+| 13   | 28.02.2025 | Müller           | 90 min        | -           |
 | 14   | 28.02.2025 | Team             | 30 min        | 30 min            |
 
 
