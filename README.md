@@ -138,9 +138,9 @@ Wir haben uns dazu entschieden, das Projekt gemäss der Planung umzusetzen.
 | 12.1  |    07.03  |     Not OK     |      Liam Koch  |Diese Funktion ist noch nicht implementiert. |
 | 13.1  |    07.03  |      Not OK    |      Liam Koch  | Diese Funktion ist noch nicht implementiert.|
 | 14.1  |    07.03  |     Not OK     |      Liam Koch  |Diese Funktion ist noch nicht implementiert. |
-| 15.1  |    07.03  |     Not OK    |      Liam Koch  | Diese Funktion ist noch nicht implementiert.|
 
-✍️ Vergessen Sie nicht, ein Fazit hinzuzufügen, welches das Test-Ergebnis einordnet.
+### Fazit 
+Das Programm ist noch nicht bereit für die benutzung. Viele Funktionen sind noch nicht implementiert und müssen noch hinzugefügt werden.
 
 ## 6 Auswerten
 
