@@ -122,10 +122,23 @@ Wir haben uns dazu entschieden, das Projekt gemäss der Planung umzusetzen.
 
 ## 5 Kontrollieren
 
-| TC-№ | Datum | Resultat | Tester |
-| ---- | ----- | -------- | ------ |
-| 1.1  |       |          |        |
-| ...  |       |          |        |
+| TC-№ | Datum | Resultat | Tester | Beschreibung|
+| ---- | ----- | -------- | ------ | ------ |
+| 1.1  |    07.03  |     OK     |      Liam Koch  | |
+| 2.1  |    07.03  |     OK     |      Liam Koch  | |
+| 3.1  |    07.03  |     OK     |      Liam Koch  | |
+| 4.1  |    07.03  |     OK     |      Liam Koch  | |
+| 5.1  |    07.03  |     OK     |      Liam Koch  | |
+| 6.1  |    07.03  |     OK     |      Liam Koch  | |
+| 7.1  |    07.03  |     Not OK     |      Liam Koch  | Diese Funktion ist noch nicht implementiert.|
+| 8.1  |    07.03  |   Not OK     |      Liam Koch  | Diese Funktion ist noch nicht implementiert.|
+| 9.1  |    07.03  |    Not OK    |      Liam Koch  |Diese Funktion ist noch nicht implementiert. |
+| 10.1  |    07.03  |     Not OK    |      Liam Koch  | Diese Funktion ist noch nicht implementiert.|
+| 11.1  |    07.03  |    Not OK    |      Liam Koch  |Diese Funktion ist noch nicht implementiert. |
+| 12.1  |    07.03  |     Not OK     |      Liam Koch  |Diese Funktion ist noch nicht implementiert. |
+| 13.1  |    07.03  |      Not OK    |      Liam Koch  | Diese Funktion ist noch nicht implementiert.|
+| 14.1  |    07.03  |     Not OK     |      Liam Koch  |Diese Funktion ist noch nicht implementiert. |
+| 15.1  |    07.03  |     Not OK    |      Liam Koch  | Diese Funktion ist noch nicht implementiert.|
 
 ✍️ Vergessen Sie nicht, ein Fazit hinzuzufügen, welches das Test-Ergebnis einordnet.
 
